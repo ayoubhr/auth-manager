@@ -2,7 +2,10 @@ import { Router } from "express"
 import { User } from "./../../model/user"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { HttpStatus } from "../../utils/http-status"
 
+// Controller with register user and login user endpoints.
+// Open, no need for JWT token to access them.
 class AuthRouter {
   private readonly _router = Router()
 
@@ -14,7 +17,7 @@ class AuthRouter {
 
         // validating all necessary user input has been sent
         if (!(name && surname && email && password)) {
-          const error = { error: "All inputs fields are required.", statuscode: "400. Bad Request." }
+          const error = { error: "All inputs fields are required.", statuscode: HttpStatus.BAD_REQUEST }
           return res.status(400).send(error)
         }
 
@@ -22,7 +25,7 @@ class AuthRouter {
         const existingUser = await User.findOne({ email })
 
         if (existingUser) {
-          const error = { error: "User already exists.", statuscode: "409. Conflict." }
+          const error = { error: "User already exists.", statuscode: HttpStatus.CONFLICT }
           return res.status(409).send(error)
         }
 
@@ -52,7 +55,7 @@ class AuthRouter {
 
         // validate user input
         if (!(email && password)) {
-          const error = { error: "All input fields are required.", statuscode: "400. Bad Request." }
+          const error = { error: "All input fields are required.", statuscode: HttpStatus.BAD_REQUEST }
           return res.status(400).send(error)
         }
 
@@ -60,7 +63,7 @@ class AuthRouter {
         const user = await User.findOne({ email })
 
         if (!user) {
-          const error = { error: "This user is not registered.", statuscode: "404. Not Found." }
+          const error = { error: "This user is not registered.", statuscode: HttpStatus.NOT_FOUND }
           return res.status(404).send(error)
         }
 
@@ -83,7 +86,7 @@ class AuthRouter {
         }
 
         // if credentials do not match
-        const error = { error: "Invalid Credentials.", statuscode: "400. Bad Request" }
+        const error = { error: "Invalid Credentials.", statuscode: HttpStatus.BAD_REQUEST }
         return res.status(400).send(error);
       } catch (error) {
         console.log(error)
