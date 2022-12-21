@@ -2,11 +2,15 @@ import { Router } from "express"
 import validate from '../helpers/validator-helper'
 import controllers from '../controllers/auth-controller'
 
-// Controller with register user and login user endpoints.
-// Open, no need for JWT token to access them.
+// Routing for the Auth functionalities, each path (/register user and /login user) 
+// leads to a controller endpoint managed by an async function.
+// Both are open, no need for a JWT token to access them.
 class AuthRouter {
   private readonly _router = Router()
 
+  // the validate object are specified in the middleware-helper class, they verify user inputs
+  // for each path are correct, otherwhise they return an JSON object with the errors.
+  // Third argument is the async function that calls the controller endpoint.
   private _configure(): void {
     this._router.post('/register', validate.reqRegisterInputData, controllers.registerController)
 

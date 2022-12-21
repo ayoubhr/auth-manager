@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken"
+import jwt, { TokenExpiredError } from "jsonwebtoken"
 import { IGetUserAuthInfoRequest } from "../../model/domain/interfaces";
 import { Response, NextFunction } from 'express'
 import { HttpStatus } from "../../utils/http-status";
 
-// function that determines whether the received request from client hold an auth token
+// function that determines whether the received request from client holds an auth token
 // and if the token is valid or invalid. Returns a response if invalid, lets you access
 // the targeted endpoint if valid.
 function verifyToken(req: IGetUserAuthInfoRequest, res: Response, next: NextFunction): void | Response<any> {
@@ -23,6 +23,9 @@ function verifyToken(req: IGetUserAuthInfoRequest, res: Response, next: NextFunc
     const decoded = jwt.verify(token, (secret as jwt.Secret));
     req.user = decoded;
   } catch (err) {
+    if (err instanceof TokenExpiredError) {
+      return res.status(401).send({ message: 'Invalid token. Access Token is expired.', statuscode: HttpStatus.UNAUTHORIZED });
+    }
     const error = { error: "Invalid Token.", statuscode: HttpStatus.UNAUTHORIZED }
     return res.status(401).send(error);
   }
