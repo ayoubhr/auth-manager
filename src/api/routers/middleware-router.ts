@@ -1,7 +1,7 @@
 import { Router } from 'express'
 const VerifyToken = require('./../helpers/middleware-helper')
 
-// Controller class where you can create your http request endpoints to 3rd services
+// Controller endpoint where you can create your http request endpoints to 3rd services
 // while securing them with the provided JWT token that gets verified
 // with the provided callback function VerifyToken.
 class Middleware {
