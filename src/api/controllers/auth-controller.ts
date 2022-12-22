@@ -13,7 +13,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
     // validating all necessary user input has been sent and is correct
     if (!errors.isEmpty()) {
-      const error = { message: "All inputs fields are required and must be correct.", errors: errors.array(), statuscode: HttpStatus.BAD_REQUEST }
+      const error = { message: "All input fields are required and must be correct.", errors: errors.array(), statuscode: HttpStatus.BAD_REQUEST }
       return res.status(400).send(error)
     }
     // extract user input data from req

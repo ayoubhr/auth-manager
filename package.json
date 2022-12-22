@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "pretest": "npm run build",
-    "test": "mocha test/tests.mjs",
+    "test": "mocha test/tests.mjs --exit",
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "dev": "ts-node-dev index.ts"

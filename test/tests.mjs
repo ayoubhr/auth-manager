@@ -1,99 +1,143 @@
 import server from '../dist/index.js'
-import chai, { should as _should } from 'chai'
+import chai from 'chai'
 import chaiHttp from 'chai-http'
 
-let should = _should()
+chai.should()
 chai.use(chaiHttp)
 
-let user = {
-  name: "",
-  surname: "",
-  email: "",
-  password: ""
-}
-let login = {
-  email: "",
-  password: ""
-}
+describe("", () => {
 
-describe('Testing Auth functionalities', () => {
-
-  beforeEach((done) => {
-    user = {
-      name: "",
-      surname: "",
-      email: "",
-      password: ""
-    }
-    login = {
-      email: "",
-      password: ""
-    }
-    done()
-  })
-
-  it('it should register a new user', (done) => {
-    user.name = "testName"
-    user.surname = "testSurname"
-    user.email = "test@gmail.com"
-    user.password = "1234"
-
+  it('it should try to register a new user but input data is not complete (lacking one or more fields).', (done) => {
     chai.request(server)
       .post('/api/auth/register')
-      .send(user)
-      .end((res, err) => {
+      .send({
+        name: "John",
+        surname: "Doe",
+        email: 'user@example.com'
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        res.body.should.be.a('object')
+        res.body.should.have.property('message').eql('All input fields are required and must be correct.')
+        res.body.should.have.property('statuscode').eql('400. Bad Request.')
+        res.body.should.have.property('errors').eql([{
+          location: "body",
+          msg: "Password input is empty.",
+          param: "password",
+        },
+        {
+          location: "body",
+          msg: "You have to provide a correct password.",
+          param: "password"
+        }])
+        done()
+      })
+  })
+
+  it('it should register a new user.', (done) => {
+    chai.request(server)
+      .post('/api/auth/register')
+      .send({
+        name: "John",
+        surname: "Doe",
+        email: 'user@example.com',
+        password: 'password'
+      })
+      .end((err, res) => {
         res.should.have.status(201)
         res.body.should.be.a('object')
         res.body.should.have.property('password')
+        res.body.should.have.property('email').eql('user@example.com')
         done()
       })
   })
 
-  it('it should throw a bad request (/register)', (done) => {
-    let badUser = {
-      name: "testName",
-      surname: "testSurname",
-      email: "test@gmail.com"
-    }
-
-    chai.request(server)
-      .post('/api/auth/register')
-      .send(badUser)
-      .end((res, err) => {
-        res.should.have.status(400)
-        res.body.should.be.a('object')
-        res.body.should.have.property('error')
-        done()
-      })
-  })
-
-  it('it should login the user', (done) => {
-    login.email = "test@gmail.com"
-    login.password = "1234"
-
+  it('it should try to authenticate a non registered user.', (done) => {
     chai.request(server)
       .post('/api/auth/login')
-      .send(login)
-      .end((res, err) => {
-        res.should.have.status(200)
+      .send({
+        email: 'user_not_registered@example.com',
+        password: 'Wrong password'
+      })
+      .end((err, res) => {
+        res.should.have.status(404)
         res.body.should.be.a('object')
-        res.body.should.have.property('token')
+        res.body.should.have.property('error').eql('This user is not registered.')
+        res.body.should.have.property('statuscode').eql('404. Not Found.')
+        done();
+      });
+  });
+
+  it('it should try to authenticate a user with invalid input.', (done) => {
+    chai.request(server)
+      .post('/api/auth/login')
+      .send({
+        email: 'user@example.com',
+        password: 'Wrong password'
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        res.body.should.be.a('object')
+        res.body.should.have.property('error').eql('Invalid Credentials.')
+        res.body.should.have.property('statuscode').eql('400. Bad Request.')
+        done();
+      });
+  });
+
+  it('it should try to login a user but input data is not complete (lacking one or more fields).', (done) => {
+    chai.request(server)
+      .post('/api/auth/login')
+      .send({
+        email: "user@example.com"
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        res.body.should.be.a('object')
+        res.body.should.have.property('message').eql('All input fields are required and must be correct.')
+        res.body.should.have.property('statuscode').eql('400. Bad Request.')
+        res.body.should.have.property('errors').eql([{
+          location: "body",
+          msg: "Password input is empty.",
+          param: "password",
+        },
+        {
+          location: "body",
+          msg: "You have to provide a correct password.",
+          param: "password"
+        }])
         done()
       })
   })
 
-  it('it should throw a bad request (/login)', (done) => {
-    let badLogin = {
-      password: "1234"
-    }
+  it('it should authenticate a user with valid input.', (done) => {
+    chai.request(server)
+      .post('/api/auth/login')
+      .send({
+        email: 'user@example.com',
+        password: 'password'
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.should.have.property('token');
+        done();
+      });
+  });
 
+  it('it should try to register an existing user.', (done) => {
     chai.request(server)
       .post('/api/auth/register')
-      .send(badLogin)
-      .end((res, err) => {
-        res.should.have.status(400)
+      .send({
+        name: "John",
+        surname: "Doe",
+        email: 'user@example.com',
+        password: 'password'
+      })
+      .end((err, res) => {
+        res.should.have.status(409)
         res.body.should.be.a('object')
-        res.body.should.have.property('error')
+        res.body.should.have.property('error').eql('User already exists.')
+        res.body.should.have.property('statuscode').eql('409. Conflict.')
         done()
       })
   })
