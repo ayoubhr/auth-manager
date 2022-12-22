@@ -3,8 +3,8 @@ import AuthRouter from './routers/auth-router'
 import MiddlewareRouter from './routers/middleware-router'
 
 // The route table job comes once we are inside the application through the initial /api path.
-// Works as a gateway door to internal services, where each provided router holds a set of
-// controller endpoints on its specified path.
+// Works as a gateway door to internal routers, where each provided router holds a set of
+// controller endpoints.
 class RouteTable {
   private readonly _router = Router()
   private readonly _auth = AuthRouter
@@ -27,4 +27,4 @@ class RouteTable {
   }
 }
 
-export = new RouteTable().router
+export default new RouteTable().router

@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { HttpStatus } from "../../utils/http-status";
-import { User } from "../../model/user";
+import User from "../../model/user";
 
 
 // controller endpoint function for the path /register

@@ -26,4 +26,4 @@ app.init.use((err: ExceptionHandler, req: Request, res: Response, next: NextFunc
   })
 })
 
-module.exports = app.init
+export default app.init

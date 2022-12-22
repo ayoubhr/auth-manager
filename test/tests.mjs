@@ -1,8 +1,8 @@
-const server = require('../index')
-const chai = require('chai')
-const chaiHttp = require('chai-http')
+import server from '../dist/index.js'
+import chai, { should as _should } from 'chai'
+import chaiHttp from 'chai-http'
 
-let should = chai.should()
+let should = _should()
 chai.use(chaiHttp)
 
 let user = {
@@ -32,7 +32,7 @@ describe('Testing Auth functionalities', () => {
     done()
   })
 
-  it('it should register a new user', () => {
+  it('it should register a new user', (done) => {
     user.name = "testName"
     user.surname = "testSurname"
     user.email = "test@gmail.com"
@@ -45,10 +45,11 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(201)
         res.body.should.be.a('object')
         res.body.should.have.property('password')
+        done()
       })
   })
 
-  it('it should throw a bad request (/register)', () => {
+  it('it should throw a bad request (/register)', (done) => {
     let badUser = {
       name: "testName",
       surname: "testSurname",
@@ -62,10 +63,11 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(400)
         res.body.should.be.a('object')
         res.body.should.have.property('error')
+        done()
       })
   })
 
-  it('it should login the user', () => {
+  it('it should login the user', (done) => {
     login.email = "test@gmail.com"
     login.password = "1234"
 
@@ -76,10 +78,11 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(200)
         res.body.should.be.a('object')
         res.body.should.have.property('token')
+        done()
       })
   })
 
-  it('it should throw a bad request (/login)', () => {
+  it('it should throw a bad request (/login)', (done) => {
     let badLogin = {
       password: "1234"
     }
@@ -91,6 +94,7 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(400)
         res.body.should.be.a('object')
         res.body.should.have.property('error')
+        done()
       })
   })
 })
