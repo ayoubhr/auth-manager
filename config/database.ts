@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import ExceptionHandler from '../src/api/exceptions/exceptions-handler'
 
-const config = require('./config')
+import config from './config'
 
 // Database connection
 const dbConnection = async () => {
@@ -11,7 +11,7 @@ const dbConnection = async () => {
   while (attempts < maxAttempts) {
     try {
       mongoose.set('strictQuery', false)
-      await mongoose.connect(config.mongo_uri)
+      mongoose.connect(config.mongo_uri)
       console.log("Successfully connected to database")
       return
     } catch (error) {

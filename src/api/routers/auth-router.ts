@@ -8,8 +8,8 @@ import controllers from '../controllers/auth-controller'
 class AuthRouter {
   private readonly _router = Router()
 
-  // the validate object are specified in the middleware-helper class, they verify user inputs
-  // for each path are correct, otherwhise they return an JSON object with the errors.
+  // the validate object properties are specified in the validator-helper class, they verify that
+  // the user inputs for each path are correct, otherwhise they return a JSON object with the errors.
   // Third argument is the async function that calls the controller endpoint.
   private _configure(): void {
     this._router.post('/register', validate.reqRegisterInputData, controllers.registerController)
@@ -26,4 +26,4 @@ class AuthRouter {
   }
 }
 
-export = new AuthRouter().router
+export default new AuthRouter().router

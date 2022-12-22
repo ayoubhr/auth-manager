@@ -27,4 +27,4 @@ class RouteTable {
   }
 }
 
-export = new RouteTable().router
+export default new RouteTable().router

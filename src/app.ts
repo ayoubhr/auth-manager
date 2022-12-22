@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-import dbConnection from './../config/database'
+import dbConnection from '../config/database'
 import bodyParser from 'body-parser'
 import RouteTable from './api/RouteTable'
 import ExceptionHandler from './api/exceptions/exceptions-handler'
@@ -26,4 +26,4 @@ app.init.use((err: ExceptionHandler, req: Request, res: Response, next: NextFunc
   })
 })
 
-module.exports = app.init
+export default app.init

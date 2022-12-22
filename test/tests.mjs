@@ -1,6 +1,10 @@
-const server = require('../index')
-const chai = require('chai')
-const chaiHttp = require('chai-http')
+//const server = require('./../index.ts')
+//const request = require('chai')
+//const use = require('chai')
+//const chaiHttp = require('chai-http')
+import server from './../dist/index.js'
+import chai from 'chai'
+import chaiHttp from 'chai-http'
 
 let should = chai.should()
 chai.use(chaiHttp)
@@ -32,23 +36,24 @@ describe('Testing Auth functionalities', () => {
     done()
   })
 
-  it('it should register a new user', () => {
+  it('it should register a new user', (done) => {
     user.name = "testName"
     user.surname = "testSurname"
     user.email = "test@gmail.com"
-    user.password = "1234"
+    user.password = "12345678"
 
     chai.request(server)
       .post('/api/auth/register')
       .send(user)
       .end((res, err) => {
-        res.should.have.status(201)
-        res.body.should.be.a('object')
-        res.body.should.have.property('password')
+        should(res.body).have.status(201)
+        should(res.body).be.a('object')
+        should(res.body).have.property('password')
+        done()
       })
   })
 
-  it('it should throw a bad request (/register)', () => {
+  it('it should throw a bad request (/register)', (done) => {
     let badUser = {
       name: "testName",
       surname: "testSurname",
@@ -62,12 +67,13 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(400)
         res.body.should.be.a('object')
         res.body.should.have.property('error')
+        done()
       })
   })
 
-  it('it should login the user', () => {
+  it('it should login the user', (done) => {
     login.email = "test@gmail.com"
-    login.password = "1234"
+    login.password = "12345678"
 
     chai.request(server)
       .post('/api/auth/login')
@@ -76,10 +82,11 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(200)
         res.body.should.be.a('object')
         res.body.should.have.property('token')
+        done()
       })
   })
 
-  it('it should throw a bad request (/login)', () => {
+  it('it should throw a bad request (/login)', (done) => {
     let badLogin = {
       password: "1234"
     }
@@ -91,6 +98,7 @@ describe('Testing Auth functionalities', () => {
         res.should.have.status(400)
         res.body.should.be.a('object')
         res.body.should.have.property('error')
+        done()
       })
   })
 })
