@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import ExceptionHandler from '../src/api/exceptions/exceptions-handler'
 
-const config = require('./config')
+import config from './config'
 
 // Database connection
 const dbConnection = async () => {
