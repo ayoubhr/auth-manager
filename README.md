@@ -21,7 +21,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *Test cases:* <br>
 
-![ScreenShot](https://gyazo.com/c37711d579456b5dcd1a49b133e38aaa)
+![Image](/test/test-cases.png)
 
 ###### *Relevant commands:* <br>
 
