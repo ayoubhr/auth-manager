@@ -35,3 +35,11 @@ To make code modular and more readable, both routes are held in their own specif
 
 1. npm install.
 2. npm run dev or npm start.
+
+## TODO LIST: <br>
+
+- [ ] Improve error management accross the application, more specifically around the middleware feature.
+- [ ] Add in-memory database for testing purposes.
+- [ ] Add more test cases.
+
+## Feel free to contribuite
