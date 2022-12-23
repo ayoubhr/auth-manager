@@ -1,3 +1,4 @@
+import { NextFunction } from "express"
 // custom exception handler
 export default class ExceptionHandler extends Error {
   constructor(
