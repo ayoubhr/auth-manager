@@ -5,8 +5,7 @@ import jwt from "jsonwebtoken"
 import { HttpStatus } from "../../utils/http-status";
 import User from "../../model/user";
 
-
-// controller endpoint function for the path /register
+// service function for the path /register
 const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const errors = validationResult(req);
@@ -46,7 +45,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-// controller endpoint function for the path /login
+// service function for the path /login
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const errors = validationResult(req)
@@ -94,9 +93,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const controllers = {
-  registerController: register,
-  loginController: login
+const services = {
+  registerService: register,
+  loginService: login
 }
 
-export default controllers
+export default services
