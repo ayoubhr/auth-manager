@@ -21,7 +21,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *Test cases:* <br>
 
-![Image](https://gyazo.com/c37711d579456b5dcd1a49b133e38aaa)
+![ScreenShot](https://gyazo.com/c37711d579456b5dcd1a49b133e38aaa)
 
 ###### *Relevant commands:* <br>
 
@@ -33,4 +33,5 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *How to launch:* <br>
 
-npm install + npm run dev or npm start.
+1. npm install.
+2. npm run dev or npm start.
