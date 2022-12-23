@@ -43,3 +43,5 @@ To make code modular and more readable, both routes are held in their own specif
 - [ ] Add more test cases.
 
 ## Feel free to contribuite
+
+Everyone is welcome to add value in any way, shape or form :smile:
