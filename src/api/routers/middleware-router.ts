@@ -9,13 +9,14 @@ import ExceptionHandler from '../exceptions/exceptions-handler';
 class Middleware {
   private readonly _router = Router()
 
+  // Secured endpoints that require a JWT auth token that gets verified
   private _configure() {
-    // Endpoint secured with a JWT auth token that is verified
-    // Path to access this endpoint is /api/v1/welcome
+    // Path to access this request is /api/v1/welcome
     this._router.get("/welcome", verifyToken, (req, res) => {
       res.status(200).send("Welcome 🙌")
     });
 
+    // Path to access this request is /api/v1/define
     this._router.get("/define", verifyToken, controller.urbanDictionaryRequest)
   }
   
