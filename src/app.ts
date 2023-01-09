@@ -16,7 +16,7 @@ switch(NODE_ENV) {
     await inMemoryMongo.connect()
     break;
   default:
-    // Prod & Dev database
+    // Prod & Dev databases
     dbConnection()  
 }
 

@@ -21,7 +21,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *Test cases:* <br>
 
-![Image](/test/test-cases.png)
+![Image](/test/in_memory_test_cases.png)
 
 ###### *Relevant commands:* <br>
 
