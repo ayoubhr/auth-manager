@@ -1,11 +1,11 @@
 import http from 'http'
-import app from './src/app'
+import { App } from './src/app.js'
 
 const port = process.env.port
-const server = http.createServer(app)
+export const server = http.createServer(App)
 
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 })
 
-module.exports = server
+//module.exports = server

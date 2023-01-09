@@ -1,9 +1,12 @@
 import mongoose from 'mongoose'
-import ExceptionHandler from '../src/api/exceptions/exceptions-handler'
+import ExceptionHandler from '../src/api/exceptions/exceptions-handler.js'
 
-import config from './config'
+import config from './config.js'
 
-// Database connection
+const NODE_ENV = process.env.NODE_ENV
+const mongo_uri = NODE_ENV === "dev" ? config.mongo_uri_dev : config.mongo_uri
+
+// Prod Database Connection
 const dbConnection = async () => {
   let attempts = 0
   const maxAttempts = 3
@@ -11,7 +14,7 @@ const dbConnection = async () => {
   while (attempts < maxAttempts) {
     try {
       mongoose.set('strictQuery', false)
-      await mongoose.connect(config.mongo_uri)
+      await mongoose.connect(mongo_uri)
       console.log("Successfully connected to database")
       return
     } catch (error) {

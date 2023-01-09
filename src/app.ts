@@ -1,29 +1,33 @@
 import express, { Request, Response, NextFunction } from 'express'
-import dbConnection from './../config/database'
+import dbConnection from './../config/database.js'
 import bodyParser from 'body-parser'
-import RouteTable from './api/RouteTable'
-import ExceptionHandler from './api/exceptions/exceptions-handler'
+import RouteTable from './api/RouteTable.js'
+import ExceptionHandler from './api/exceptions/exceptions-handler.js'
+import inMemoryMongo from '../config/in_memory_db.js'
 
-class App {
-  public init = express()
+export const App = express()
 
-  constructor() {
-    dbConnection()
-  }
+const NODE_ENV = process.env.NODE_ENV
+
+switch(NODE_ENV) {
+  case "test":
+    // in-memory database for test cases
+    await inMemoryMongo.start()
+    await inMemoryMongo.connect()
+    break;
+  default:
+    // Prod & Dev database
+    dbConnection()  
 }
 
-const app = new App()
+App.use(bodyParser.json())
 
-app.init.use(bodyParser.json())
+App.use('/api', RouteTable)
 
-app.init.use('/api', RouteTable)
-
-app.init.use((err: ExceptionHandler, req: Request, res: Response, next: NextFunction) => {
+App.use((err: ExceptionHandler, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode).json({
     status: 'error',
     statusCode: err.statusCode,
     message: err.message
   })
 })
-
-export default app.init

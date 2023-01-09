@@ -1,6 +1,6 @@
 import { Router } from "express"
-import validate from '../helpers/validator-helper'
-import services from '../services/auth-services'
+import validate from '../helpers/validator-helper.js'
+import services from '../services/auth-services.js'
 
 // Routing for the Auth functionalities, each path (/register user and /login user) 
 // leads to an internal service managed by an async function.
