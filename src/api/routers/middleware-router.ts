@@ -1,7 +1,6 @@
 import { Router } from 'express'
-import verifyToken from './../helpers/middleware-helper';
-import controller from './../controllers/middleware-controller'
-import ExceptionHandler from '../exceptions/exceptions-handler';
+import verifyToken from './../helpers/middleware-helper.js';
+import controller from './../controllers/middleware-controller.js'
 
 // Controller endpoint where you can create your http request endpoints to 3rd party services
 // while securing them with the provided JWT token that gets verified

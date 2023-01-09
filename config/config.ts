@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
-import ExceptionHandler from '../src/api/exceptions/exceptions-handler'
+import ExceptionHandler from '../src/api/exceptions/exceptions-handler.js'
+
 // .env variables loader
 try {
   dotenv.config()
@@ -12,6 +13,7 @@ try {
 
 export default {
   port: String(process.env.PORT),
-  mongo_uri: String(process.env.MONGO_URI),
+  mongo_uri: String(process.env.MONGO_URI_PROD),
+  mongo_uri_dev: String(process.env.MONGO_URI_DEV),
   token_secret: process.env.TOKEN_SECRET
 }

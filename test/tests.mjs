@@ -1,11 +1,16 @@
-import server from '../dist/index.js'
+import { server } from '../dist/index.js'
 import chai from 'chai'
 import chaiHttp from 'chai-http'
+import inMemoryMongo from '../dist/config/in_memory_db.js'
 
 chai.should()
 chai.use(chaiHttp)
 
-describe("", () => {
+describe("Auth-Manager test cases:\r\n", () => {
+
+  after(async () => {
+    await inMemoryMongo.stop()
+  })
 
   it('it should try to register a new user but input data is not complete (lacking one or more fields).', (done) => {
     chai.request(server)
@@ -48,8 +53,8 @@ describe("", () => {
         res.body.should.be.a('object')
         res.body.should.have.property('password')
         res.body.should.have.property('email').eql('user@example.com')
-        done()
       })
+      done()
   })
 
   it('it should try to authenticate a non registered user.', (done) => {
@@ -64,8 +69,8 @@ describe("", () => {
         res.body.should.be.a('object')
         res.body.should.have.property('error').eql('This user is not registered.')
         res.body.should.have.property('statuscode').eql('404. Not Found.')
-        done();
-      });
+      })
+      done()
   });
 
   it('it should try to authenticate a user with invalid input.', (done) => {
@@ -80,11 +85,11 @@ describe("", () => {
         res.body.should.be.a('object')
         res.body.should.have.property('error').eql('Invalid Credentials.')
         res.body.should.have.property('statuscode').eql('400. Bad Request.')
-        done();
-      });
+      })
+      done()
   });
 
-  it('it should try to login a user but input data is not complete (lacking one or more fields).', (done) => {
+  it('it should try to authenticate a user but input data is not complete (lacking one or more fields).', (done) => {
     chai.request(server)
       .post('/api/auth/login')
       .send({
@@ -105,8 +110,8 @@ describe("", () => {
           msg: "You have to provide a correct password.",
           param: "password"
         }])
-        done()
       })
+      done()
   })
 
   it('it should authenticate a user with valid input.', (done) => {
@@ -120,8 +125,8 @@ describe("", () => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('token');
-        done();
-      });
+      })
+      done()
   });
 
   it('it should try to register an existing user.', (done) => {
@@ -138,7 +143,7 @@ describe("", () => {
         res.body.should.be.a('object')
         res.body.should.have.property('error').eql('User already exists.')
         res.body.should.have.property('statuscode').eql('409. Conflict.')
-        done()
       })
+      done()
   })
 })

@@ -25,7 +25,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *Relevant commands:* <br>
 
-* npm run dev: runs ts-node-dev on index.ts for development purposes.
+* npm run dev: runs ts-node + nodemon on index.ts for development purposes.
 
 * npm test: transpiles the typescript application into a javascript module in the /dist folder and then runs the test cases with _Mocha_.
 
@@ -33,13 +33,15 @@ To make code modular and more readable, both routes are held in their own specif
 
 ###### *How to launch:* <br>
 
-1. npm install.
-2. npm run dev or npm start.
+1. Run --> npm install.
+2. Make sure a MongoDB server is setup.
+2. Run --> npm run dev or npm start.
 
 ## TODO LIST: <br>
 
 - [ ] Improve error management accross the application, more specifically around the middleware feature.
-- [ ] Add in-memory database for testing purposes.
+- [x] Add in-memory database for testing purposes and separate the application in to different environments with a different database for each one (test/dev/prod).
+- [ ] Add a Docker image for each environment (test/dev/prod).
 - [ ] Add more test cases.
 
 ## Feel free to contribuite
