@@ -12,8 +12,6 @@ try {
 }
 
 export default {
-  port: String(process.env.PORT),
-  mongo_uri: String(process.env.MONGO_URI_PROD),
-  mongo_uri_dev: String(process.env.MONGO_URI_DEV),
-  token_secret: process.env.TOKEN_SECRET
+  mongo_uri_prod: String(process.env.MONGO_URI_PROD),
+  mongo_uri_dev: String(process.env.MONGO_URI_DEV)
 }

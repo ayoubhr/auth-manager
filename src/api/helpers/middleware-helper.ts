@@ -11,7 +11,7 @@ const { TokenExpiredError } = pkg
 function verifyToken(req: Request, res: Response, next: NextFunction): void | Response<any> {
   
   // loads secret from env variables and extracts the token from the request
-  const secret = process.env.token_secret
+  const secret = process.env.TOKEN_SECRET as jwt.Secret
   const token = req.body.token || req.query.token || req.headers["x-access-token"];
 
   // validates token is not empty
@@ -22,7 +22,7 @@ function verifyToken(req: Request, res: Response, next: NextFunction): void | Re
 
   // decodes the token with the secret to check if the token is valid
   try {
-    const decoded = jwt.verify(token, (secret as jwt.Secret));
+    const decoded = jwt.verify(token, secret);
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       return res.status(401).send({ message: 'Invalid token. Access Token is expired.', statuscode: HttpStatus.UNAUTHORIZED });

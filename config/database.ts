@@ -4,7 +4,7 @@ import ExceptionHandler from '../src/api/exceptions/exceptions-handler.js'
 import config from './config.js'
 
 const NODE_ENV = process.env.NODE_ENV
-const mongo_uri = NODE_ENV === "dev" ? config.mongo_uri_dev : config.mongo_uri
+const mongo_uri = NODE_ENV === "dev" ? config.mongo_uri_dev : config.mongo_uri_prod
 
 // Prod Database Connection
 const dbConnection = async () => {
