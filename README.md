@@ -43,7 +43,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 * make up-prod: make script that builds a docker compose configuration file of the application to run it in prod.
 
-* make up-dev: make script that shuts down the current running docker compose configuration file.
+* make down: make script that shuts down the current running docker compose configuration file.
 
 ## TODO LIST: <br>
 
