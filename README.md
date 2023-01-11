@@ -23,7 +23,13 @@ To make code modular and more readable, both routes are held in their own specif
 
 ![Image](/test/in_memory_test_cases.png)
 
-###### *Relevant commands:* <br>
+###### *How to launch locally:* <br>
+
+1. Run --> npm install.
+2. Make sure a MongoDB server is setup.
+2. Run --> npm run dev or npm start.
+
+###### *Relevant commands to run locally:* <br>
 
 * npm run dev: runs ts-node + nodemon on index.ts for development purposes.
 
@@ -31,18 +37,20 @@ To make code modular and more readable, both routes are held in their own specif
 
 * npm start: transpiles the typescript application into a javascript module in the /dist folder and then runs the application.
 
-###### *How to launch:* <br>
+###### *Relevant commands to run locally:* <br>
 
-1. Run --> npm install.
-2. Make sure a MongoDB server is setup.
-2. Run --> npm run dev or npm start.
+* make up-dev: make script that builds a docker compose configuration file of the application to run it in dev.
+
+* make up-prod: make script that builds a docker compose configuration file of the application to run it in prod.
+
+* make up-dev: make script that shuts down the current running docker compose configuration file.
 
 ## TODO LIST: <br>
 
 - [ ] Improve error management accross the application, more specifically around the middleware feature.
-- [x] Add in-memory database for testing purposes and separate the application in to different environments with a different database for each one (test/dev/prod).
-- [ ] Add a Docker image for each environment (test/dev/prod).
-- [ ] Add more test cases.
+- [x] Add in-memory database for testing purposes and separate the application into different environments with a different database for each one (test/dev/prod).
+- [x] Add a Docker image for each environment (dev/prod).
+- [ ] Implement authorization roles.
 
 ## Feel free to contribuite
 

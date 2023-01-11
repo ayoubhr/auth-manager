@@ -6,7 +6,7 @@ import config from './config.js'
 const NODE_ENV = process.env.NODE_ENV
 const mongo_uri = NODE_ENV === "dev" ? config.mongo_uri_dev : config.mongo_uri_prod
 
-// Prod Database Connection
+// For Prod & Dev database connection
 const dbConnection = async () => {
   let attempts = 0
   const maxAttempts = 3
