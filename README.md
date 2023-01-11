@@ -37,7 +37,7 @@ To make code modular and more readable, both routes are held in their own specif
 
 * npm start: transpiles the typescript application into a javascript module in the /dist folder and then runs the application.
 
-###### *Relevant commands to run locally:* <br>
+###### *Relevant commands to run the Docker files:* <br>
 
 * make up-dev: make script that builds a docker compose configuration file of the application to run it in dev.
 
