@@ -2,8 +2,8 @@ import { validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { HttpStatus } from "../../utils/http-status.js";
-import User from "../../model/user.js";
+import { HttpStatus } from "../../../utils/http-status.js";
+import User from "../model/IUserImpl.js";
 
 // service function for the path /register
 const register = async (req: Request, res: Response, next: NextFunction) => {

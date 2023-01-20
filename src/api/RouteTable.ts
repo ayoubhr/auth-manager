@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import AuthRouter from './routers/auth-router.js'
-import MiddlewareRouter from './routers/middleware-router.js'
-import verifyToken from './helpers/middleware-helper.js'
+import AuthRouter from './infrastructure/routers/auth-router.js'
+import MiddlewareRouter from './infrastructure/routers/middleware-router.js'
+import verifyToken from './application/helpers/middleware-helper.js'
 
 // The route table job comes once we are inside the application through the initial /api path.
 // Works as a gateway door to internal routers, where each provided router holds a set of

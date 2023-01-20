@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import ExceptionHandler from '../src/api/exceptions/exceptions-handler.js'
+import ExceptionHandler from '../src/api/infrastructure/exceptions/exceptions-handler.js'
 
 import config from './config.js'
 
