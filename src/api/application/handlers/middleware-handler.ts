@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express"
 import axios from 'axios'
-import ExceptionHandler from "../exceptions/exceptions-handler.js";
+import ExceptionHandler from "../../infrastructure/exceptions/exceptions-handler.js";
 
 // Example of request made to a third service after authenticating the user.
 // In this case, the auth-manager plays the role of a middleware server.
-const urbanDictionaryRequest = async (req: Request, res: Response, next: NextFunction) => {
+const urbanDictionaryRequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const options = {
       method: 'GET',
@@ -25,8 +25,8 @@ const urbanDictionaryRequest = async (req: Request, res: Response, next: NextFun
   }
 }
 
-const controller = {
-  urbanDictionaryRequest: urbanDictionaryRequest
+const handler = {
+  urbanDictionaryRequestHandler: urbanDictionaryRequestHandler
 }
 
-export default controller
+export default handler

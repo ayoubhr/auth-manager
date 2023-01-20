@@ -11,13 +11,15 @@
 
 ###### *There is two different routes a request to the auth-manager can take:* <br>
 
-* Auth route: this route leads to an internal service layer that is host to the register() and login() user functions.
+* Auth route: this route leads to an internal service layer in the application folder that is host to the register() and login() user functions.
 
-* Middleware route: this route leads to a controller layer where requests to 3rd party services can be placed.
+* Middleware route: this route leads to handler layer in the application folder where requests to 3rd party services can be placed.
 
 As was described previously, the middleware route endpoints are secured with the _"VerifyToken"_ helper that sits on the helpers folder inside the api. The Auth route path is open and accesible without verification.
 
 To make code modular and more readable, both routes are held in their own specific file that then gets exported into a general _RouteTable_ class that is then passed into our _Express_ application upon initialization.
+
+![Image](/arq.drawio.png)
 
 ###### *Test cases:* <br>
 
@@ -50,7 +52,8 @@ To make code modular and more readable, both routes are held in their own specif
 - [ ] Improve error management accross the application, more specifically around the middleware feature.
 - [x] Add in-memory database for testing purposes and separate the application into different environments with a different database for each one (test/dev/prod).
 - [x] Add a Docker image for each environment (dev/prod).
-- [ ] Implement authorization roles.
+- [ ] Implement basic authorization roles.
+- [ ] Implement JWT refresh token.
 
 ## Feel free to contribuite
 

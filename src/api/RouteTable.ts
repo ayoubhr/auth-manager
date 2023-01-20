@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import AuthRouter from './routers/auth-router.js'
-import MiddlewareRouter from './routers/middleware-router.js'
+import AuthRouter from './infrastructure/routers/auth-router.js'
+import MiddlewareRouter from './infrastructure/routers/middleware-router.js'
+import verifyToken from './application/helpers/middleware-helper.js'
 
 // The route table job comes once we are inside the application through the initial /api path.
 // Works as a gateway door to internal routers, where each provided router holds a set of
@@ -12,8 +13,10 @@ class RouteTable {
 
   // Bind each router to a different path.
   private _configure(): void {
+    // Open path no need for authentication
     this._router.use('/auth', this._auth)
-    this._router.use('/v1', this._middleware)
+    // Provided callback function VerifyToken to authenticate the JWT token
+    this._router.use('/v1', verifyToken, this._middleware)
   }
 
   // Bootstraps the routing configuration once the object is created

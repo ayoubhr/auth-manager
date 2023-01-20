@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from 'express'
-import { HttpStatus } from "../../utils/http-status.js";
+import { HttpStatus } from "../../../utils/http-status.js";
 import jwt from "jsonwebtoken"
 import pkg from 'jsonwebtoken'
 const { TokenExpiredError } = pkg
@@ -9,7 +9,7 @@ const { TokenExpiredError } = pkg
 // Returns a JSON object response with the errors if JWT token is invalid,
 // Lets you access the targeted endpoint if JWT token is valid.
 function verifyToken(req: Request, res: Response, next: NextFunction): void | Response<any> {
-  
+
   // loads secret from env variables and extracts the token from the request
   const secret = process.env.TOKEN_SECRET as jwt.Secret
   const token = req.body.token || req.query.token || req.headers["x-access-token"];
