@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
-import dbConnection from './../config/database.js'
+import dbConnection from './api/infrastructure/config/database.js'
 import bodyParser from 'body-parser'
 import RouteTable from './api/RouteTable.js'
 import ExceptionHandler from './api/infrastructure/exceptions/exceptions-handler.js'
-import inMemoryMongo from '../config/in_memory_db.js'
+import inMemoryMongo from './api/infrastructure/config/in_memory_db.js'
 
 export const App = express()
 

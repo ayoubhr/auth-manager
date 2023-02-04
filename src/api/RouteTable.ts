@@ -5,7 +5,7 @@ import verifyToken from './application/helpers/middleware-helper.js'
 
 // The route table job comes once we are inside the application through the initial /api path.
 // Works as a gateway door to internal routers, where each provided router holds a set of
-// controller endpoints.
+// services or 3rd party services request handlers.
 class RouteTable {
   private readonly _router = Router()
   private readonly _auth = AuthRouter
