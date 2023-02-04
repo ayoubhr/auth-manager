@@ -1,7 +1,7 @@
 import { server } from '../dist/index.js'
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import inMemoryMongo from '../dist/config/in_memory_db.js'
+import inMemoryMongo from '../dist/src/api/infrastructure/config/in_memory_db.js'
 
 chai.should()
 chai.use(chaiHttp)

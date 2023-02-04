@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from 'express'
-import { HttpStatus } from "../../../utils/http-status.js";
+import { HttpStatus } from "../utils/http-status.js";
 import jwt from "jsonwebtoken"
 import pkg from 'jsonwebtoken'
 const { TokenExpiredError } = pkg

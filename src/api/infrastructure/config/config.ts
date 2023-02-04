@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import ExceptionHandler from '../src/api/infrastructure/exceptions/exceptions-handler.js'
+import ExceptionHandler from '../exceptions/exceptions-handler.js'
 
 // .env variables loader
 try {
